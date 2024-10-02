@@ -63,3 +63,28 @@ jobs:
 
       - name: ruff
         run: uv run ruff check --output-format=github .
+
+  test:
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.2.0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3.1.3
+        with:
+          enable-cache: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.2.0
+        with:
+          python-version-file: .python-version
+
+      - run: brew install libmagic
+        if: ${{ matrix.os == 'macos-latest' }}
+
+      - name: Print help text
+        run: uv run python -m langchain_input_tracing --help
