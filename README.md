@@ -78,13 +78,13 @@ Options:
 ### Example Input
 
 ```shell
-python -m langchain_prompt_protection "What do you know about OAuth?"
+python -m langchain_input_tracing "What do you know about OAuth?"
 ```
 
 ### Sample Output
-```shell
+
 To secure your web app, embrace transparency in your security efforts and adopt Secure by Design principles, which focus on integrating security throughout the software development lifecycle. Implement application security hardening, robust user authentication, and secure default settings to enhance overall security. Additionally, consider using multi-factor authentication (MFA) and regularly educate users on best practices to protect their accounts.
-```
+
 
 [Secure Audit Log]: https://pangea.cloud/docs/audit/
 [Pangea signup]: https://pangea.cloud/signup
