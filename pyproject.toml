@@ -1,11 +1,7 @@
 [project]
 name = "langchain-input-tracing"
 version = "1.0.0"
-description = """\
-An example CLI tool in Python that demonstrates how to integrate Pangea's \
-Secure Audit Log service into a LangChain app to maintain an audit log of \
-context and prompts being sent to LLMs.\
-"""
+description = ""
 readme = "README.md"
 requires-python = ">=3.12"
 

@@ -1,17 +1,18 @@
 # Input Tracing for LangChain in Python
 
-An example CLI tool in Python that demonstrates integrating Pangea's
-[Secure Audit Log][] service into a LangChain app to maintain an audit log of context and
-prompts being sent to LLMs.
+An example Python app that demonstrates integrating Pangea's [Secure Audit Log][]
+service into a LangChain app to maintain an audit log of context and prompts
+being sent to LLMs.
 
-In this case, our topic context consists of articles about authentication from our 
-[Secure by Design Hub][] included in  `langchain_input_tracing/data`.
+In this case, our topic context consists of articles about authentication from our
+[Secure by Design Hub][] included in `langchain_input_tracing/data`.
 
 ## Prerequisites
 
 - Python v3.12 or greater.
-- pip v24.2 or [uv][] v0.4.5.
-- A [Pangea account][Pangea signup] with Secure Audit Log enabled.
+- pip v24.2 or [uv][] v0.4.29.
+- A [Pangea account][Pangea signup] with Secure Audit Log enabled with the
+  AI Audit Log Schema Config.
 - An [OpenAI API key][OpenAI API keys].
 - libmagic
 
@@ -53,8 +54,9 @@ The sample can then be executed with:
 python -m langchain_input_tracing "What do you know about OAuth?"
 ```
 
-*Note:* Because our context is limited to the authentication articles mentioned above, if you ask a question outside that context, you will get some variation of "I don't know."
-
+_Note:_ Because our context is limited to the authentication articles mentioned
+above, if you ask a question outside that context, you will get some variation
+of "I don't know."
 
 ## Usage
 
@@ -83,8 +85,12 @@ python -m langchain_input_tracing "What do you know about OAuth?"
 
 ### Sample Output
 
-To secure your web app, embrace transparency in your security efforts and adopt Secure by Design principles, which focus on integrating security throughout the software development lifecycle. Implement application security hardening, robust user authentication, and secure default settings to enhance overall security. Additionally, consider using multi-factor authentication (MFA) and regularly educate users on best practices to protect their accounts.
-
+To secure your web app, embrace transparency in your security efforts and adopt
+Secure by Design principles, which focus on integrating security throughout the
+software development lifecycle. Implement application security hardening, robust
+user authentication, and secure default settings to enhance overall security.
+Additionally, consider using multi-factor authentication (MFA) and regularly
+educate users on best practices to protect their accounts.
 
 [Secure Audit Log]: https://pangea.cloud/docs/audit/
 [Pangea signup]: https://pangea.cloud/signup
