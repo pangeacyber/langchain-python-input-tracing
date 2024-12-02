@@ -9,6 +9,7 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts.chat import ChatPromptTemplate
+from langchain_core.runnables import Runnable
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 from pydantic import SecretStr
@@ -91,13 +92,13 @@ def main(
     vectorstore = FAISS.from_documents(documents=docs_split, embedding=embeddings_model)
     retriever = vectorstore.as_retriever()
 
-    audit_callback = PangeaAuditCallbackHandler(token=audit_token, domain=pangea_domain, config_id=audit_config_id)
-    llm = ChatOpenAI(model=model, api_key=openai_api_key, callbacks=[audit_callback])
+    llm = ChatOpenAI(model=model, api_key=openai_api_key)
     qa_chain = create_stuff_documents_chain(llm, PROMPT)
 
-    rag_chain = create_retrieval_chain(retriever, qa_chain)
+    rag_chain: Runnable = create_retrieval_chain(retriever, qa_chain)
 
-    click.echo(rag_chain.invoke({"input": prompt})["answer"])
+    audit_callback = PangeaAuditCallbackHandler(token=audit_token, domain=pangea_domain, config_id=audit_config_id)
+    click.echo(rag_chain.invoke({"input": prompt}, config={"callbacks": [audit_callback]})["answer"])
 
 
 if __name__ == "__main__":
