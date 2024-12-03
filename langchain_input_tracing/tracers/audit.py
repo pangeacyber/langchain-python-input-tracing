@@ -50,11 +50,11 @@ class PangeaAuditCallbackHandler(BaseTracer):
         self._client.log_bulk(
             [
                 {
-                    "timestamp": run.start_time,
-                    "event_trace_id": run.trace_id,
-                    "event_type": "retriever/start",
-                    "event_tools": {"metadata": run.metadata},
-                    "event_input": canonicalize_json(run.inputs).decode("utf-8"),
+                    "start_time": run.start_time,
+                    "trace_id": run.trace_id,
+                    "type": "retriever/start",
+                    "tools": {"metadata": run.metadata},
+                    "input": canonicalize_json(run.inputs).decode("utf-8"),
                 }
             ]
         )
@@ -64,15 +64,15 @@ class PangeaAuditCallbackHandler(BaseTracer):
         self._client.log_bulk(
             [
                 {
-                    "timestamp": run.end_time,
-                    "event_trace_id": run.trace_id,
-                    "event_type": "retriever/end",
-                    "event_tools": {
+                    "end_time": run.end_time,
+                    "trace_id": run.trace_id,
+                    "type": "retriever/end",
+                    "tools": {
                         "invocation_params": run.extra.get("invocation_params", {}),
                         "metadata": run.metadata,
                     },
-                    "event_input": canonicalize_json(run.inputs).decode("utf-8"),
-                    "event_output": to_json(run.outputs if run.outputs else {}).decode("utf-8"),
+                    "input": canonicalize_json(run.inputs).decode("utf-8"),
+                    "output": to_json(run.outputs if run.outputs else {}).decode("utf-8"),
                 }
             ]
         )
@@ -83,11 +83,11 @@ class PangeaAuditCallbackHandler(BaseTracer):
         self._client.log_bulk(
             [
                 {
-                    "timestamp": run.start_time,
-                    "event_trace_id": run.trace_id,
-                    "event_type": "llm/start",
-                    "event_tools": {"invocation_params": run.extra.get("invocation_params", {})},
-                    "event_input": canonicalize_json(inputs).decode("utf-8"),
+                    "start_time": run.start_time,
+                    "trace_id": run.trace_id,
+                    "type": "llm/start",
+                    "tools": {"invocation_params": run.extra.get("invocation_params", {})},
+                    "input": canonicalize_json(inputs).decode("utf-8"),
                 }
             ]
         )
